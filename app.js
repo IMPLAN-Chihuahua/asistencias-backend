@@ -3,7 +3,8 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 
-const APP_PORT = 8080;
+require('dotenv').config();
+const APP_PORT = process.env.PORT || 8080;
 const app = express();
 
 app.use(express.json());
