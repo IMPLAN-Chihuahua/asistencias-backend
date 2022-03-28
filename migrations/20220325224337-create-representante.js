@@ -22,6 +22,19 @@ module.exports = {
         allowNull: false,
         defaultValue: false
       },
+      checkInDate: {
+        type: Sequelize.DATE,
+        allowNull: true
+      },
+      leftAt: {
+        type: Sequelize.DATE,
+        allowNull: true
+      },
+      inMeeting: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+      },
       idDependencia: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -29,10 +42,6 @@ module.exports = {
           model: 'Dependencias',
           key: 'id'
         }
-      },
-      leftAt: {
-        type: Sequelize.DATE,
-        allowNull: true
       },
       createdAt: {
         type: Sequelize.DATE,

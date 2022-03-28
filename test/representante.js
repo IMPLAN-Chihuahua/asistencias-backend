@@ -25,10 +25,24 @@ describe('/representantes', function () {
           expect(err).to.be.null;
           expect(res).to.have.status(200);
           expect(res.body.data).to.be.an('array').that.is.not.empty;
+          expect(res.body.data[0].dependenciaName).to.be.an('string');
           expect(res.body.total).to.be.an('number');
           done();
         })
     });
+
+    it('Should filter representantes by checked in', function (done) {
+      chai.request(server)
+        .get('/api/representantes?checkedIn&perPage=3')
+        .end(function (err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200)
+          expect(res.body.data).to.satisfy((representantes) => {
+            return representantes.every(r => r.checkedIn === true)
+          });
+          done();
+        })
+    })
 
   });
 
@@ -36,11 +50,30 @@ describe('/representantes', function () {
 
     it('Should check-in a representante', function (done) {
       chai.request(server)
-        .patch('/api/representantes/6')
-        .send({ checkedIn: true })
+        .patch('/api/representantes/1/join')
         .end(function (err, res) {
           expect(err).to.be.null;
           expect(res).to.have.status(200);
+          done();
+        });
+    });
+
+    it('Should kick a representante out of the reunion', function (done) {
+      chai.request(server)
+        .patch('/api/representantes/1/kickOut')
+        .end(function (err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          done();
+        });
+    });
+
+    it('Should fail to process request due to semantic errors (invalid fields)', function (done) {
+      chai.request(server)
+        .patch('/api/representantes/1/invalidaction')
+        .end(function (err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(422);
           done();
         });
     });

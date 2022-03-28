@@ -17,6 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     hasVoto: DataTypes.BOOLEAN,
     checkedIn: DataTypes.BOOLEAN,
+    checkInDate: DataTypes.DATE,
+    inMeeting: DataTypes.BOOLEAN,
     leftAt: DataTypes.DATE
   }, {
     sequelize,
