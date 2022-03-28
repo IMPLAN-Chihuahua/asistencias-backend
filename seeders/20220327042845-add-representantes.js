@@ -11,6 +11,7 @@ module.exports = {
         hasVoto: faker.datatype.boolean(),
         checkedIn: faker.datatype.boolean(),
         idDependencia: ((i + 1) % 50) + 1,
+        leftAt: null,
         createdAt: new Date(),
         updatedAt: new Date()
       })

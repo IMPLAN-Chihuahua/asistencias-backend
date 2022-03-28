@@ -30,6 +30,10 @@ module.exports = {
           key: 'id'
         }
       },
+      leftAt: {
+        type: Sequelize.DATE,
+        allowNull: true
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,

@@ -1,11 +1,26 @@
-const { Representante } = require('../models');
+const { Representante, Dependencia, sequelize } = require('../models');
 
 const getRepresentantes = async (req, res) => {
   try {
     const { limit, offset, page } = req;
     const representantes = await Representante.findAndCountAll({
       limit,
-      offset
+      offset,
+      include: {
+        model: Dependencia,
+        require: true,
+        attributes: []
+      },
+      attributes: [
+        'id',
+        'name',
+        [sequelize.col('"dependencia"."name"'), 'dependenciaName'],
+        'hasVoto',
+        'checkedIn',
+        'leftAt',
+        'createdAt',
+        'updatedAt',
+      ]
     });
     const total = representantes.count;
     const totalPages = Math.ceil(total / limit);
