@@ -7,6 +7,7 @@ const getRepresentantes = async (req, res) => {
     if ('checkedIn' in req.matchedData) {
       filters.where.checkedIn = true;
     }
+    console.log(filters)
     const representantes = await Representante.findAndCountAll({
       ...filters,
       limit,
@@ -22,9 +23,13 @@ const getRepresentantes = async (req, res) => {
         [sequelize.col('"dependencia"."name"'), 'dependenciaName'],
         'hasVoto',
         'checkedIn',
+        'inMeeting',
         'leftAt',
         'createdAt',
         'updatedAt',
+      ],
+      order: [
+        ['updatedAt', 'DESC']
       ]
     });
     const total = representantes.count;
@@ -72,18 +77,30 @@ const getRepresentantesByDependencia = async (req, res) => {
   }
 }
 
+const checkIn = () => ({
+  checkedIn: true,
+  checkInDate: new Date()
+});
+
 const updateRepresentante = async (req, res) => {
   try {
     const { id, action } = req.matchedData;
     let representante = {};
 
-    if (action === 'join') {
-      representante.checkInDate = new Date();
-      representante.checkedIn = true;
-      representante.inMeeting = true;
-    } else if (action === 'kickout') {
-      representante.leftAt = new Date();
-      representante.inMeeting = false;
+    switch (action) {
+      case 'join':
+        representante = { ...checkIn() }
+        representante.inMeeting = true;
+        break;
+      case 'kickout':
+        representante.leftAt = new Date();
+        representante.inMeeting = false;
+        break;
+      case 'checkin':
+        representante = { ...checkIn() }
+        break;
+      default:
+        new Error('Invalid action');
     }
 
     await Representante.update({ ...representante }, {
