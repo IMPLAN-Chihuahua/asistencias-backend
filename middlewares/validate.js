@@ -12,7 +12,6 @@ const errorFormatter = ({ location, msg, param }) => {
 
 const validate = (req, res, next) => {
   const errors = validationResult(req).formatWith(errorFormatter);
-
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() })
   }
