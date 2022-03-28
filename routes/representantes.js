@@ -15,7 +15,7 @@ router.get('/',
 router.patch(
   '/:id/:action',
   param('id').isInt().toInt(),
-  param('action').trim().toLowerCase().isIn(['kickout', 'join']),
+  param('action').trim().toLowerCase().isIn(['kickout', 'join', 'checkin']),
   validate,
   updateRepresentante
 );
