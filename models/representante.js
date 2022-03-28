@@ -16,7 +16,10 @@ module.exports = (sequelize, DataTypes) => {
   Representante.init({
     name: DataTypes.STRING,
     hasVoto: DataTypes.BOOLEAN,
-    checkedIn: DataTypes.BOOLEAN
+    checkedIn: DataTypes.BOOLEAN,
+    checkInDate: DataTypes.DATE,
+    inMeeting: DataTypes.BOOLEAN,
+    leftAt: DataTypes.DATE
   }, {
     sequelize,
     name: {

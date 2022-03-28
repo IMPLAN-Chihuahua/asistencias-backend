@@ -17,6 +17,8 @@ module.exports = {
     for (let i = 0; i < 50; i++) {
       dependencias.push({
         name: `${faker.company.companyName()} - ${i}`,
+        createdAt: new Date(),
+        updatedAt: new Date()
       })
     }
     await queryInterface.bulkInsert('Dependencias', dependencias, {});
