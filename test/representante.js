@@ -50,7 +50,7 @@ describe('/representantes', function () {
 
     it('Should check-in a representante', function (done) {
       chai.request(server)
-        .patch('/api/representantes/4/join')
+        .patch('/api/representantes/76/join')
         .end(function (err, res) {
           expect(err).to.be.null;
           expect(res).to.have.status(200);

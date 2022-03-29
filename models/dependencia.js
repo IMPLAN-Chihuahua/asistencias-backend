@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Dependencia.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
+    sector: DataTypes.ENUM('SECTOR_SOCIAL', 'GOBIERNO', 'SECTOR_PRIVADO', 'SECTOR_TECNICO-ACADEMICO')
   }, {
     sequelize,
     timestamps: true,

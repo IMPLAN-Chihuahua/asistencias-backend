@@ -35,6 +35,10 @@ module.exports = {
         allowNull: false,
         defaultValue: false
       },
+      level: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
       idDependencia: {
         type: Sequelize.INTEGER,
         allowNull: false,
