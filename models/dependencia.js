@@ -10,13 +10,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      this.hasOne(models.Representante, { foreignKey: 'idDependencia' })
     }
   }
   Dependencia.init({
     name: DataTypes.STRING
   }, {
     sequelize,
+    timestamps: true,
     name: {
       singular: 'dependencia',
       plural: 'dependencias'

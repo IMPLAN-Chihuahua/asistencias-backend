@@ -14,8 +14,9 @@ app.use(morgan('dev'));
 app.use('/api/dependencias', require('./routes/dependencias'));
 app.use('/api/representantes', require('./routes/representantes'));
 
+const env = process.env.NODE_ENV || 'development';
 const server = app.listen(APP_PORT, () => {
-  process.stdout.write(`app started on port ${APP_PORT}\n`)
+  process.stdout.write(`Environment ${env}\nApp started on port ${APP_PORT}\n`)
 });
 
 module.exports = server;
