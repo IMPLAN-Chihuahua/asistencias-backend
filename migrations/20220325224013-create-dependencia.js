@@ -12,6 +12,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      sector: {
+        type: Sequelize.ENUM,
+        allowNull: false,
+        values: ['SECTOR_SOCIAL', 'GOBIERNO', 'SECTOR_PRIVADO', 'SECTOR_TECNICO-ACADEMICO']
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,

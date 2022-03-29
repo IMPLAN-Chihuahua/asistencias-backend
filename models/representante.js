@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     checkedIn: DataTypes.BOOLEAN,
     checkInDate: DataTypes.DATE,
     inMeeting: DataTypes.BOOLEAN,
-    leftAt: DataTypes.DATE
+    leftAt: DataTypes.DATE,
+    level: DataTypes.INTEGER
   }, {
     sequelize,
     timestamps: true,
