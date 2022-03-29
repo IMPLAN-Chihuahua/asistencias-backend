@@ -12,6 +12,9 @@ const getDependencias = async (req, res) => {
         where: {
           inMeeting: true
         },
+        attributes: {
+          exclude: ['idDependencia', 'createdAt', 'updatedAt']
+        }
       }
     });
     const total = dependencias.count;
