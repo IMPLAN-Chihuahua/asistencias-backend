@@ -7,7 +7,6 @@ const getRepresentantes = async (req, res) => {
     if ('checkedIn' in req.matchedData) {
       filters.where.checkedIn = true;
     }
-    console.log(filters)
     const representantes = await Representante.findAndCountAll({
       ...filters,
       limit,
@@ -23,10 +22,10 @@ const getRepresentantes = async (req, res) => {
         [sequelize.col('"dependencia"."name"'), 'dependenciaName'],
         'hasVoto',
         'checkedIn',
+        'checkInDate',
         'inMeeting',
         'leftAt',
-        'createdAt',
-        'updatedAt',
+        'level',
       ],
       order: [
         ['updatedAt', 'DESC']
