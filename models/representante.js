@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     leftAt: DataTypes.DATE
   }, {
     sequelize,
+    timestamps: true,
     name: {
       singular: 'representante',
       plural: 'representantes'

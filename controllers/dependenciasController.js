@@ -1,11 +1,18 @@
-const { Dependencia } = require('../models');
+const { Dependencia, Representante } = require('../models');
 
 const getDependencias = async (req, res) => {
   try {
     const { offset, limit, page } = req;
     const dependencias = await Dependencia.findAndCountAll({
       offset,
-      limit
+      limit,
+      include: {
+        model: Representante,
+        required: false,
+        where: {
+          inMeeting: true
+        },
+      }
     });
     const total = dependencias.count;
     const totalPages = Math.ceil(total / limit);

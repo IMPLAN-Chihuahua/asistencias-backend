@@ -30,10 +30,10 @@ describe('/dependencias', function () {
 
   describe('GET /', function () {
 
-    it('Should return a list of dependencias', function (done) {
+    it('Should return a list of dependencias with a list of representantes in the meeting', function (done) {
       const dependenciasDummy = [aDependencia(1), aDependencia(2)];
       const findAndCountAllFake = sinon.fake.resolves({ count: dependenciasDummy.length, rows: dependenciasDummy });
-      sinon.replace(Dependencia, 'findAndCountAll', findAndCountAllFake);
+      // sinon.replace(Dependencia, 'findAndCountAll', findAndCountAllFake);
 
       chai.request(server)
         .get('/api/dependencias')
@@ -43,7 +43,8 @@ describe('/dependencias', function () {
           expect(res).to.have.status(200);
           expect(res.body.total).to.be.a('number');
           expect(res.body.data).to.be.an('array').that.is.not.empty;
-          expect(findAndCountAllFake.calledOnce).to.be.true;
+          expect(res.body.data[0].representantes).to.be.an('array')
+          // expect(findAndCountAllFake.calledOnce).to.be.true;
           done();
         });
     });
